@@ -1,26 +1,31 @@
+import pygame
+import numpy as np
 from time import time
+from typing import Union
+from utils import numeric
+from gui import Drawable
 
-class Boat:
+class Boat(Drawable):
     def __init__(
         self,
         length: int,
         width: int,
-        color="#000000",
-        x=0.0,
-        y=0.0,
-        orientation=0.0,
-        linear_velocity=0.0,
-        angular_velocity=0.0
+        x: "numeric"=0,
+        y: "numeric"=0,
+        orientation: "numeric"=0,
+        linear_velocity: "numeric"=0,
+        angular_velocity: "numeric"=0,
+        color: Union[str, pygame.Color]="#000000"
     ):
         # Properties
         self.length = length
         self.width = width
-        self.color = color
         self.x = x
         self.y = y
         self.orientation = orientation
         self.linear_velocity = linear_velocity
         self.angular_velocity = angular_velocity
+        self.color = color
         self.time = time()
         self.dt = 0
         
@@ -36,7 +41,29 @@ class Boat:
         self.time = current_time        
 
     def move(self):
-        update_delta_time()
+        self.update_delta_time()
         self.x += np.cos(self.orientation) * self.linear_velocity * self.dt
         self.y += np.sin(self.orientation) * self.linear_velocity * self.dt
         self.orientation += self.angular_velocity * self.dt
+
+    def draw(self, screen: pygame.Surface):
+        diagonal = (self.length ** 2 + self.width ** 2) ** (1 / 2)
+        a1 = np.arctan2(self.width, self.length) * 2
+        a2 = np.pi - a1
+        angles = [self.orientation + a1 / 2]
+        angles.append(angles[0] + a2)
+        angles.append(angles[1] + a1)
+        angles.append(angles[2] + a2)
+
+        points = []
+        for i in range(4):
+            points.append(self.translate_draw_point((
+                            self.x + np.cos(angles[i]) * diagonal / 2,
+                            self.y + np.sin(angles[i]) * diagonal / 2
+                         ), screen))
+
+        points.append(self.translate_draw_point((self.x + np.cos(self.orientation) * self.length * 0.8, 
+                                            self.y + np.sin(self.orientation) * self.length * 0.8
+                     ), screen))
+
+        pygame.draw.polygon(screen, pygame.Color(self.color), points)

@@ -1,41 +1,38 @@
-import numpy as np
 import pygame
-from boat import Boat
+import numpy as np
 from time import time
+from typing import Tuple, List, Union
+from utils import numeric
+from abc import ABC, abstractmethod
 
-def draw_boat(boat: Boat, screen):
-    a1 = np.arctan2(boat.width, boat.length) * 2
-    a2 = np.pi - a1
-    angles = [boat.orientation + a1 / 2]
-    angles.append(angles[0] + a2)
-    angles.append(angles[1] + a1)
-    angles.append(angles[2] + a2)
-    diagonal = (boat.length ** 2 + boat.width ** 2) ** (1 / 2)
+class Drawable(ABC):
+    @abstractmethod
+    def draw(self, screen: pygame.Surface):
+        pass
 
-    points = []
-    for i in range(4):
-        points.append(translate_draw_point((
-                        boat.x + np.cos(angles[i]) * diagonal / 2,
-                        boat.y + np.sin(angles[i]) * diagonal / 2,
-                    )))
+    def translate_draw_point(self, point: Tuple[numeric, numeric], screen) -> Tuple[numeric, numeric]:
+        width, height = screen.get_size()
+        return (point[0] + width / 2, height / 2 - point[1])
 
-    pygame.draw.polygon(screen, "black", points)
-
-def translate_draw_point(point):
-    return (point[0] + screen_width / 2, screen_height / 2 - point[1])
+    def darken_color(self, color: pygame.Color, factor: float) -> pygame.Color:
+        r = int(color.r * factor)
+        g = int(color.g * factor)
+        b = int(color.b * factor)
+        return pygame.Color(r, g, b, color.a)
 
 class GUI:
-    def __init__(self, boat: Boat, height: int, width: int):
-        global screen_height
-        global screen_width
-        screen_height = height
-        screen_width = width
-
+    def __init__(self, screen_width: int, screen_height: int):
         pygame.init()
-        self.boat = boat
         self.screen = pygame.display.set_mode((screen_width, screen_height))
 
-    def run(self):
-        self.screen.fill("white")
-        draw_boat(self.boat, self.screen)
+    def clear(self, color: Union[str, pygame.Color]="white"):
+        self.screen.fill(color)
+
+    def update(self):
         pygame.display.update()
+        
+    def get_events(self) -> List[pygame.event.Event]:
+        return pygame.event.get()
+        
+    def quit(self):
+        pygame.quit()
