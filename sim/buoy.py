@@ -7,7 +7,7 @@ from gui import Drawable
 
 BUOY_RADIUS = 12
 
-class Buoy(ABC):
+class Buoy(Drawable, ABC):
     def __init__(self, x: "numeric", y: "numeric", color: BuoyColors):
         self.x = x
         self.y = y
@@ -25,13 +25,13 @@ class PoleBuoy(Buoy):
         center = self.translate_draw_point((self.x, self.y), screen)
         pygame.draw.circle(screen, pygame.Color(self.color.value), center, BUOY_RADIUS)
         pygame.draw.circle(screen, self.darken_color(pygame.Color(self.color.value), 0.7), center, BUOY_RADIUS * 0.8)
-        pygame.draw.circle(screen, pygame.Color(self.color), center, BUOY_RADIUS * 0.5)
+        pygame.draw.circle(screen, pygame.Color(self.color.value), center, BUOY_RADIUS * 0.5)
 
 class BallBuoy(Buoy):
     def __init__(self, x: "numeric", y: "numeric", color: BuoyColors):
         super().__init__(x, y, color)
 
     def draw(self, screen: pygame.Surface):
-        center = (self.x, self.y)
+        center = self.translate_draw_point((self.x, self.y), screen)
         pygame.draw.circle(screen, pygame.Color(self.color.value), center, BUOY_RADIUS)
         pygame.draw.circle(screen, self.darken_color(pygame.Color(self.color.value), 0.25), center, BUOY_RADIUS * 0.5)

@@ -6,7 +6,7 @@ from utils import numeric
 from gui import Drawable
 
 class Boat(Drawable):
-    def init(
+    def __init__(
         self,
         length: int,
         width: int,
@@ -58,8 +58,8 @@ class Boat(Drawable):
         points = []
         for i in range(4):
             points.append(self.translate_draw_point((
-                            self.x - np.cos(angles[i]) * diagonal / 2,
-                            self.y + np.sin(angles[i]) * diagonal
+                            self.x + np.cos(angles[i]) * diagonal / 2,
+                            self.y + np.sin(angles[i]) * diagonal / 2
                          ), screen))
 
         points.append(self.translate_draw_point((self.x + np.cos(self.orientation) * self.length * 0.8, 

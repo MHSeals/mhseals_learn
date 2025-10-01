@@ -1,6 +1,6 @@
 from enum import Enum
 
-class BuoyColors(enum):
+class BuoyColors(Enum):
     RED = "red"
     GREEN = "green"
     YELLOW = "yellow"

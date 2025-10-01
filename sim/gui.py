@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-import time
+from time import time
 from typing import Tuple, List, Union
 from utils import numeric
 from abc import ABC, abstractmethod
@@ -16,11 +16,12 @@ class Drawable(ABC):
 
     def darken_color(self, color: pygame.Color, factor: float) -> pygame.Color:
         r = int(color.r * factor)
+        g = int(color.g * factor)
         b = int(color.b * factor)
         return pygame.Color(r, g, b, color.a)
 
 class GUI:
-    def __init__(screen_width: int):
+    def __init__(self, screen_width: int, screen_height: int):
         pygame.init()
         self.screen = pygame.display.set_mode((screen_width, screen_height))
 
@@ -33,5 +34,5 @@ class GUI:
     def get_events(self) -> List[pygame.event.Event]:
         return pygame.event.get()
         
-    def quit(self)
+    def quit(self):
         pygame.quit()

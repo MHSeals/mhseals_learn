@@ -1,9 +1,10 @@
+import pygame
 from boat import Boat
-from buoy import BallBuoy
+from buoy import BallBuoy, PoleBuoy
 from enums import BuoyColors
 from gui import GUI
 
-boat = Boat(50, 30, 0, 0, "#1f1f1f")
+boat = Boat(50, 30, 0, 0, color="#1f1f1f")
 buoys = [BallBuoy(-250, -150, BuoyColors.BLUE), PoleBuoy(100, 100, BuoyColors.GREEN)]
 gui = GUI(800, 600)
 running = True
@@ -22,5 +23,7 @@ while running:
     for buoy in buoys:
         buoy.draw(gui.screen)
     boat.draw(gui.screen)
+
+    gui.update()
     
 gui.quit()
