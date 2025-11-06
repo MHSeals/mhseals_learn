@@ -1,14 +1,15 @@
 import pygame
-from typing import Literal, Union
+from typing import Literal
 from utils import numeric
 from enums import BuoyColors
 from abc import ABC, abstractmethod
 from gui import Drawable
+from constants import Constants as C
 
-BUOY_RADIUS = 12
+C.to_px()
 
 class Buoy(Drawable, ABC):
-    def __init__(self, x: "numeric", y: "numeric", color: BuoyColors):
+    def __init__(self, x: numeric, y: numeric, color: BuoyColors):
         self.x = x
         self.y = y
         self.color = color
@@ -18,20 +19,22 @@ class Buoy(Drawable, ABC):
         pass
 
 class PoleBuoy(Buoy):
-    def __init__(self, x: "numeric", y: "numeric", color: Literal[BuoyColors.RED, BuoyColors.GREEN]):
+    def __init__(self, x: numeric, y: numeric, color: Literal[BuoyColors.RED, BuoyColors.GREEN]):
         super().__init__(x, y, color)
         
     def draw(self, screen: pygame.Surface):
+        radius = C.Buoy.RADIUS
         center = self.translate_draw_point((self.x, self.y), screen)
-        pygame.draw.circle(screen, pygame.Color(self.color.value), center, BUOY_RADIUS)
-        pygame.draw.circle(screen, self.darken_color(pygame.Color(self.color.value), 0.7), center, BUOY_RADIUS * 0.8)
-        pygame.draw.circle(screen, pygame.Color(self.color.value), center, BUOY_RADIUS * 0.5)
+        pygame.draw.circle(screen, pygame.Color(self.color.value), center, radius)
+        pygame.draw.circle(screen, self.darken_color(pygame.Color(self.color.value), 0.7), center, radius * 0.8)
+        pygame.draw.circle(screen, pygame.Color(self.color.value), center, radius * 0.5)
 
 class BallBuoy(Buoy):
     def __init__(self, x: "numeric", y: "numeric", color: BuoyColors):
         super().__init__(x, y, color)
 
     def draw(self, screen: pygame.Surface):
+        radius = C.Buoy.RADIUS
         center = self.translate_draw_point((self.x, self.y), screen)
-        pygame.draw.circle(screen, pygame.Color(self.color.value), center, BUOY_RADIUS)
-        pygame.draw.circle(screen, self.darken_color(pygame.Color(self.color.value), 0.25), center, BUOY_RADIUS * 0.5)
+        pygame.draw.circle(screen, pygame.Color(self.color.value), center, radius)
+        pygame.draw.circle(screen, self.darken_color(pygame.Color(self.color.value), 0.25), center, radius * 0.5)

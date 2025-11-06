@@ -23,6 +23,8 @@ class Drawable(ABC):
 class GUI:
     def __init__(self, screen_width: int, screen_height: int):
         pygame.init()
+        self.width = screen_width
+        self.height = screen_height
         self.screen = pygame.display.set_mode((screen_width, screen_height))
 
     def clear(self, color: Union[str, pygame.Color]="white"):
