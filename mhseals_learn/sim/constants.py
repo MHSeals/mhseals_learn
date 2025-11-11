@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Union
-from utils import numeric
+from mhseals_learn.sim.utils import numeric
 
 class Meters(float):
     pass

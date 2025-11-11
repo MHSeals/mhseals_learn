@@ -1,10 +1,10 @@
 import pygame
 from typing import Literal
-from utils import numeric
-from enums import BuoyColors
 from abc import ABC, abstractmethod
-from gui import Drawable
-from constants import Constants as C
+from mhseals_learn.sim.utils import numeric
+from mhseals_learn.sim.enums import BuoyColors
+from mhseals_learn.sim.gui import Drawable
+from mhseals_learn.sim.constants import Constants as C
 
 C.to_px()
 

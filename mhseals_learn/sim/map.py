@@ -1,9 +1,8 @@
-from typing import Self
-from boat import Boat
-from buoy import PoleBuoy
-from enums import BuoyColors
-from utils import numeric, generate_rectangle
-from constants import Constants as C
+from mhseals_learn.sim.boat import Boat
+from mhseals_learn.sim.buoy import PoleBuoy
+from mhseals_learn.sim.enums import BuoyColors
+from mhseals_learn.sim.utils import numeric, generate_rectangle
+from mhseals_learn.sim.constants import Constants as C
 import numpy as np
 import random
 
@@ -26,7 +25,7 @@ class Gate:
             self.buoys.append(PoleBuoy(*points[i], colors[i]))
             
     @classmethod
-    def random(cls, boat: Boat) -> Self:
+    def random(cls, boat: Boat):
         width = random.uniform(C.Gate.WIDTH_MIN, C.Gate.WIDTH_MAX)
         height = random.uniform(C.Gate.HEIGHT_MIN, C.Gate.HEIGHT_MAX)
         dist = random.uniform(C.Gate.GAP_MIN, C.Gate.GAP_MAX) + height / 2

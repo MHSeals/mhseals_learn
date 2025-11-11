@@ -22,13 +22,5 @@ pip install -r requirements.txt
 
 Now you are ready to run the code! Again, make sure you are in the `sim` folder once you have installed the dependencies. You can now run
 ```bash
-python3 main.py # python, not python3 if you are on Windows
+python3 main.py # python instead of python3 if you are on Windows
 ```
-
-### Your Task
-Now that you are ready to run and test the code, read through all the errors you get after running the code, and fix them one by one until you are able to replicate the example below. [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) is a very useful tool that can help highlight syntax errors and make your life a lot easier. If you manage to fix the errors easily, have fun! Mess around with the code any maybe try to impress us. Try implementing some cool navigation algorithm like [Dijkstra's](https://www.w3schools.com/dsa/dsa_algo_graphs_dijkstra.php), [PID](https://www.geeksforgeeks.org/electronics-engineering/proportional-integral-derivative-controller-in-control-system/) (there are good videos online and some example code in this repo at `lessons/pid/sim_pid.py`), or [pure pursuit](https://wiki.purduesigbots.com/software/control-algorithms/basic-pure-pursuit).
-
-![til](./demo.gif)
-
-> [!NOTE]
-> If you are practicing fixing the code, please refrain from viewing this; however, the functioning program with no bugs (yes, bugs have intentionally been planted for learning purposes) can be seen at this [commit](https://github.com/MHSeals/mhseals_learn/commit/1aba0507258cc78d8ecb228b64bcb288256499e5).

@@ -2,9 +2,9 @@ import pygame
 import numpy as np
 from time import time
 from typing import Union
-from utils import numeric, generate_rectangle
-from gui import Drawable
-from constants import Constants as C
+from mhseals_learn.sim.utils import numeric, generate_rectangle
+from mhseals_learn.sim.gui import Drawable
+from mhseals_learn.sim.constants import Constants as C
 
 C.to_px()
 C.to_rad()

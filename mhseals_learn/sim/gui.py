@@ -2,8 +2,8 @@ import pygame
 import numpy as np
 from time import time
 from typing import Tuple, List, Union
-from utils import numeric
 from abc import ABC, abstractmethod
+from mhseals_learn.sim.utils import numeric
 
 class Drawable(ABC):
     @abstractmethod
